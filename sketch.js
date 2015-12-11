@@ -1,5 +1,9 @@
 //scene one
 var backgroundoneImage;
+var tree1_1;
+var tree1_2;
+var tree1_3;
+var tree1_4;
 var blimponeImage;
 var boyoneImage;
 var momImage;
@@ -18,17 +22,21 @@ var fishdeadImage;
 // house scene
 var currentScene = "homeA"
 	// var blimpA = +200;
-var blimpB = 150;
+var blimpB = 300;
 
 
 function preload() {
 	//scene one home
 	backgroundoneImage = loadImage("images/backgroundone.jpg");
+	tree1_1Image = loadImage("images/tree1_1.png");
+	tree1_2Image = loadImage("images/tree1_2.png");
+	tree1_3Image = loadImage("images/tree1_3.png");
+	tree1_4Image = loadImage("images/tree1_4.png");
 	blimponeImage = loadImage("images/blimpone.png");
 	boyoneImage = loadImage("images/boyone.png");
 	momImage = loadImage("images/mom.png");
 	//scene two tent
-	backgroundtwoImage = loadImage("images/backgroundthree.png");
+	backgroundtwoImage = loadImage("images/backgroundtwo.jpg");
 	redImage = loadImage("images/red.png");
 	tentImage = loadImage("images/tent.png");
 	woodImage = loadImages("images/wood.png");
@@ -57,21 +65,28 @@ function draw() {
 
 function drawHomeA() {
 	image(backgroundoneImage, 0, 0);
+	image(tree1_3Image, 340, 170);
+	image(tree1_2Image, 240, 170);
+	image(tree1_1Image, 190, 210);
 	image(boyoneImage, 500, 250);
-	// image(momImage, 200, 280);
-	// image(blimponeImage, 290, 120);
-	//animate blimpone
-	// blimpA += -.8;
-	// if (blimpA > 600) {
-	// 	blimpA = -200;
-	// }
-	// image(blimponeImage, blimpA, 115);
-
+	//animate blimp
 	// change position
 	blimpB = blimpB - .5;
 	//contrain blimp
-	if (blimpB > 650) {
-		blimpB = 150;
+	if (blimpB < 170) {
+		blimpB = 300;
 	}
-	image(blimponeImage, blimpB, 115);
+	image(blimponeImage, blimpB, 120);
+}
+
+function drawCampA() {
+	image(backgroundtwoImage, 0, 0);
+}
+
+function mouseReleased() {
+	if (currentScene === "homeA") {
+		currentScene = "campA";
+	} else {
+		currentScene = "homeA";
+	}
 }
