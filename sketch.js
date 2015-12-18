@@ -20,7 +20,8 @@ var blimpA = 400;
 var blimpB = 650;
 var appleA = 130
 var fishA = 500;
-var fishB = 500
+var fishB = 500;
+var appleY = 100;
 
 
 
@@ -55,8 +56,11 @@ function draw() {
 		drawCampC();
 	} else if (currentScene === "campE") {
 		drawCampE();
+	} else if (currentScene === "campF") {
+		drawCampF();
 	}
 }
+
 
 function drawCampE() {
 	image(backgroundfiveImage, 0, 0);
@@ -84,16 +88,19 @@ function drawCampA() {
 		}
 	}
 }
-
+//apple
 function drawCampB() {
 	image(backgroundthreeImage, 0, 0);
 
+
+	//applefalls
 	image(appleImage, 200, 100);
+
+
 	//user becomes cursor
 	image(armImage, mouseX, mouseY);
 
 	//to fourth scene
-	mouseWasPressed = mouseIsPressed;
 	if (mouseIsPressed &&
 		mouseX > 100 &&
 		mouseX < 300 &&
@@ -101,19 +108,13 @@ function drawCampB() {
 		mouseY < 300) {
 		image(backgroundfourImage, 0, 0);
 
-		fishA = fishA - 4;
-		//animate fish
-		if (fishA < 0) {
-			fishA = 500;
-		}
-		image(fishaliveImage, fishA, 300);
-		image(fishdeadImage, 300, 300);
-
 	}
 }
 
+//fish scene
 function drawCampC() {
 	image(backgroundfourImage, 0, 0);
+
 	//	animate fish
 	fishA = fishA - 4;
 	//contrain blimp
@@ -121,19 +122,22 @@ function drawCampC() {
 		fishA = 500;
 	}
 	image(fishaliveImage, fishA, 300);
-
-
+	// image(fishdeadImage, 300, 300);
+	//animate arm	image
+	image(armImage, mouseX, mouseY);
 
 }
-
-
-
+//dfish dead
 function drawCampE() {
-	image(backgroundfiveImage, 0, 0);
+	image(backgroundfourImage, 0, 0);
+	image(fishdeadImage, 300, 300);
+	image(armImage, mouseX, mouseY);
 
 }
-
-
+//done
+function drawCampF() {
+	image(backgroundfiveImage, 0, 0);
+}
 
 function mouseReleased() {
 	if (currentScene === "campA") {
@@ -142,6 +146,8 @@ function mouseReleased() {
 		currentScene = "campC";
 	} else if (currentScene === "campC") {
 		currentScene = "campE";
-
+	} else if (currentScene === "campE") {
+		currentScene = "campF";
 	}
+
 }
