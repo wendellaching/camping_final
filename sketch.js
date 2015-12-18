@@ -1,52 +1,44 @@
-//scene one
-var backgroundoneImage;
-var tree1_1;
-var tree1_2;
-var tree1_3;
-var tree1_4;
-var blimponeImage;
-var boyoneImage;
-var momImage;
-//scene two
-var backgroundtwoImage;
-var redImage;
-var tentImage;
-var woodImage;
-var yellowImage;
-//scene three berries
-var backgroundthreeImage;
-//scene four fish
-var backgroundfourImage;
-var fishaliveImage;
-var fishdeadImage;
-// house scene
-var currentScene = "homeA"
-	// var blimpA = +200;
-var blimpB = 300;
+var blimpone;
+var blimptwo;
+var boyone;
+var fishalive;
+var fishdead;
+var list;
+
+var arm;
+var backgroundtwo;
+var backgroundthree;
+var backgroundfour;
+// var x = backgroundfourImage;
+var currentScene = "campA"
+	// var currentSceneC = "campC"
+	// var currentSceneD = "campD"
+	// var currentSceneB = "campB"
+	// var blimpA
+var blimpA = 400;
+//var blimpB
+var blimpB = 650;
+var appleA = 130
+var fishA = 500;
+var fishB = 500
+
 
 
 function preload() {
-	//scene one home
-	backgroundoneImage = loadImage("images/backgroundone.jpg");
-	tree1_1Image = loadImage("images/tree1_1.png");
-	tree1_2Image = loadImage("images/tree1_2.png");
-	tree1_3Image = loadImage("images/tree1_3.png");
-	tree1_4Image = loadImage("images/tree1_4.png");
-	blimponeImage = loadImage("images/blimpone.png");
-	boyoneImage = loadImage("images/boyone.png");
-	momImage = loadImage("images/mom.png");
 	//scene two tent
 	backgroundtwoImage = loadImage("images/backgroundtwo.jpg");
-	redImage = loadImage("images/red.png");
-	tentImage = loadImage("images/tent.png");
-	woodImage = loadImages("images/wood.png");
-	yellowImage = loadImages("images/yellow.png");
+	boyoneImage = loadImage("images/boyone.png");
+	listImage = loadImage("images/list.png");
+	blimptwoImage = loadImage("images/blimptwo.png");
 	//scene three berries
-	backgroundthreeImage = loadImage("images/backgroundthree.png");
+	backgroundthreeImage = loadImage("images/backgroundthree.jpg");
 	//scene four fish
 	backgroundfourImage = loadImage("images/backgroundfour.jpg");
 	fishaliveImage = loadImage("images/fishalive.png");
 	fishdeadImage = loadImage("images/fishdead.png");
+	appleImage = loadImage("images/apple.png");
+	armImage = loadImage("images/arm.png");
+	backgroundfiveImage = loadImage("images/backgroundfive.png");
 }
 
 function setup() {
@@ -55,38 +47,101 @@ function setup() {
 }
 
 function draw() {
-	//home scene	if (currentScene === "nightA")
-	if (currentScene === "homeA") {
-		drawHomeA();
-	} else if (currentScene === "campA") {
+	if (currentScene === "campA") {
 		drawCampA();
+	} else if (currentScene === "campB") {
+		drawCampB();
+	} else if (currentScene === "campC") {
+		drawCampC();
+	} else if (currentScene === "campE") {
+		drawCampE();
 	}
 }
 
-function drawHomeA() {
-	image(backgroundoneImage, 0, 0);
-	image(tree1_3Image, 340, 170);
-	image(tree1_2Image, 240, 170);
-	image(tree1_1Image, 190, 210);
-	image(boyoneImage, 500, 250);
-	//animate blimp
-	// change position
-	blimpB = blimpB - .5;
-	//contrain blimp
-	if (blimpB < 170) {
-		blimpB = 300;
-	}
-	image(blimponeImage, blimpB, 120);
+function drawCampE() {
+	image(backgroundfiveImage, 0, 0);
+
 }
 
 function drawCampA() {
 	image(backgroundtwoImage, 0, 0);
+	image(boyoneImage, 100, 250);
+	//animate blimp two
+	blimpB = blimpB - .5;
+	//contrain blimp
+	if (blimpB < 0) {
+		blimpB = 650;
+	}
+	image(blimptwoImage, blimpB, 70);
+	//list
+	if (mouseX > 500) {
+		if (mouseX < 800) {
+			if (mouseY > 250) {
+				if (mouseY < 600) {
+					image(listImage, 0, 0);
+				}
+			}
+		}
+	}
 }
 
+function drawCampB() {
+	image(backgroundthreeImage, 0, 0);
+
+	image(appleImage, 200, 100);
+	//user becomes cursor
+	image(armImage, mouseX, mouseY);
+
+	//to fourth scene
+	mouseWasPressed = mouseIsPressed;
+	if (mouseIsPressed &&
+		mouseX > 100 &&
+		mouseX < 300 &&
+		mouseY > 100 &&
+		mouseY < 300) {
+		image(backgroundfourImage, 0, 0);
+
+		fishA = fishA - 4;
+		//animate fish
+		if (fishA < 0) {
+			fishA = 500;
+		}
+		image(fishaliveImage, fishA, 300);
+		image(fishdeadImage, 300, 300);
+
+	}
+}
+
+function drawCampC() {
+	image(backgroundfourImage, 0, 0);
+	//	animate fish
+	fishA = fishA - 4;
+	//contrain blimp
+	if (fishA < 0) {
+		fishA = 500;
+	}
+	image(fishaliveImage, fishA, 300);
+
+
+
+}
+
+
+
+function drawCampE() {
+	image(backgroundfiveImage, 0, 0);
+
+}
+
+
+
 function mouseReleased() {
-	if (currentScene === "homeA") {
-		currentScene = "campA";
-	} else {
-		currentScene = "homeA";
+	if (currentScene === "campA") {
+		currentScene = "campB";
+	} else if (currentScene === "campB") {
+		currentScene = "campC";
+	} else if (currentScene === "campC") {
+		currentScene = "campE";
+
 	}
 }
